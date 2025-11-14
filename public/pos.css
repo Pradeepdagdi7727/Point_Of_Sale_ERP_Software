@@ -1,0 +1,407 @@
+/* General Body and Container */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Keep your font consistent */
+    background-color: #f4f7fa; /* Light background for the main content area */
+}
+
+/* Specific styles for the POS content within the new layout */
+.pos-content {
+    background-color: #ffffff; /* White background for the POS content area */
+    padding: 20px; /* Add some padding around your POS elements */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 20px; /* Space between header and POS content */
+    flex-grow: 1; /* Make the POS content area expand vertically */
+    display: flex; /* Use flex to manage inner layout of pos-container */
+    flex-direction: column;
+}
+
+.pos-container {
+    background-color: #fff; /* This will now be the background for the POS system *inside* the content-area */
+    border-radius: 8px;
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */ /* Removed as content-area now has it */
+    width: 100%;
+    max-width: none; /* Let the content-area manage max-width */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-grow: 1; /* Allow pos-container to grow within pos-content */
+}
+
+/* Header Section */
+.pos-container .header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #fdfdfd;
+    gap: 15px;
+    position: relative; /* <-- Keep this for internal positioning */
+    z-index: 2; /* <-- Give the header a z-index, lower than the dropdown */
+}
+.search-input-container {
+    flex-grow: 1;
+    position: relative;
+}
+.pos-container .header input[type="text"] { /* Target input *inside* pos-container header */
+    width: 100%; /* Make search input fill its container */
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+/* Search Results Dropdown */
+.search-results-dropdown {
+    position: absolute;
+    top: 100%; /* Position below the input */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100; /* Ensure it appears above other elements */
+    max-height: 200px;
+    overflow-y: auto;
+    display: none; /* Hidden by default */
+}
+.search-results-dropdown.show {
+    display: block; /* Show when results are available */
+}
+.search-result-item {
+    padding: 10px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+.search-result-item:last-child {
+    border-bottom: none;
+}
+.search-result-item:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* Customer Select (if uncommented in HTML) */
+.pos-container .header .customer-select {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #fff;
+}
+.pos-container .header .customer-select span {
+    margin-right: 5px;
+    color: #555;
+}
+.pos-container .header .customer-select select {
+    border: none;
+    padding: 5px;
+    font-size: 0.95rem;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+.pos-container .header .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.pos-container .header .btn.icon-only {
+    background-color: #6c757d;
+    padding: 8px;
+}
+.pos-container .header .btn:hover {
+    opacity: 0.9;
+}
+
+/* Table Section */
+.table-section {
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: 250px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table thead {
+    background-color: #f8f9fa;
+}
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+table th {
+    font-weight: 600;
+    color: #333;
+}
+table td {
+    color: #555;
+    vertical-align: middle;
+}
+.product-row {
+    background-color: #fff;
+}
+.product-row:hover {
+    background-color: #f5f5f5;
+}
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.qty-controls button {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    color: #495057;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.qty-controls button:hover {
+    background-color: #dee2e6;
+}
+.qty-controls input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px 0;
+    font-size: 0.7rem;
+}
+.remove-item {
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Remarks Section (if uncommented in HTML) */
+.remarks-section {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    background-color: #fdfdfd;
+}
+.remarks-section textarea {
+    width: calc(100% - 20px);
+    min-height: 60px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+/* Summary Section */
+.summary-section {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    background-color: #fdfdfd;
+    gap: 10px 20px;
+}
+.summary-item {
+    flex: 1 1 150px;
+    min-width: 120px;
+    padding: 8px 0;
+    text-align: center;
+}
+.summary-item label {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+.summary-item .value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+.summary-item .value.total-amount {
+    font-size: 1.8rem;
+    color: #28a745;
+}
+.add-charges-btn {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Actions Section */
+.actions-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    background-color: #fdfdfd;
+}
+.action-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.action-btn.secondary { background-color: #6c757d; }
+.action-btn.success { background-color: #28a745; }
+.action-btn.warning { background-color: #ffc107; color: #333; }
+.action-btn.info { background-color: #17a2b8; }
+.action-btn:hover {
+    opacity: 0.9;
+}
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+.total-amount-box {
+    background-color: #e6ffed;
+    border-left: 5px solid #28a745;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    grid-column: span 1;
+    margin-left: auto;
+}
+.total-amount-box .label {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+.total-amount-box .value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pos-container .header {
+        flex-wrap: wrap;
+    }
+    .pos-container .header input[type="text"], .pos-container .header .customer-select, .pos-container .header .btn {
+        flex: 1 1 100%;
+        margin-bottom: 10px;
+    }
+    .summary-section {
+        flex-direction: column;
+    }
+    .summary-item {
+        text-align: left;
+        padding-bottom: 0;
+    }
+    .total-amount-box {
+        width: 100%;
+        text-align: right;
+    }
+}
+@media (max-width: 480px) {
+    .actions-section {
+        grid-template-columns: 1fr;
+    }
+}
+/* ===== Invoice Overlay Styling ===== */
+.invoice-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.invoice-box {
+  width: 320px;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  max-height: 95vh;
+  overflow-y: auto;
+}
+
+.invoice-box h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.invoice-box table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-box table th,
+.invoice-box table td {
+  font-size: 12px;
+  border-bottom: 1px dashed #ccc;
+  text-align: left;
+  padding: 3px;
+}
+
+.invoice-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.invoice-buttons button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.invoice-buttons button:nth-child(2) {
+  background: #f44336;
+}
+

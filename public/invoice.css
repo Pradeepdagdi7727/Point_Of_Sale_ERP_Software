@@ -1,0 +1,59 @@
+/* ==============================
+   58mm Thermal Receipt Print Style
+   ============================== */
+@media print {
+  body {
+    width: 58mm;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .receipt {
+    width: 100%;
+    text-align: center;
+  }
+
+  .receipt h2 {
+    font-size: 14px;
+    margin: 4px 0;
+  }
+
+  .receipt p {
+    margin: 2px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+  }
+
+  th, td {
+    text-align: left;
+    font-size: 11px;
+    padding: 2px 0;
+  }
+
+  th {
+    border-bottom: 1px dashed #000;
+  }
+
+  .total-line {
+    border-top: 1px dashed #000;
+    margin-top: 5px;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 5px;
+    border-top: 1px dashed #000;
+    padding-top: 4px;
+  }
+
+  .tax-summary {
+    margin-top: 5px;
+    border-top: 1px dashed #000;
+  }
+}

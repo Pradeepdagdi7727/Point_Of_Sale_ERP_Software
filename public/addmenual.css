@@ -1,0 +1,195 @@
+/* Ensure the body and html take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Keep your font consistent */
+    background-color: #f4f7fa; /* Light background for the main content area */
+    display: flex; /* Make body a flex container */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Styles for the main content wrapper for addmenual.html */
+/* This will ensure the form area takes up available space */
+.main-content {
+    flex-grow: 1; /* Allows it to take available horizontal space */
+    /* Remove padding here, or apply it to the content-area instead if you want padding *around* the scrollable part */
+    /* padding: 20px; */
+    overflow-y: hidden; /* Prevent this wrapper from scrolling, let content-area handle it */
+    display: flex;
+    flex-direction: column; /* Stack header and content vertically */
+    /* max-height: 100vh; */ /* Ensure it doesn't overflow viewport height */
+}
+
+/* --- NEW / MODIFIED STYLES FOR FIXED HEADER --- */
+.fixed-header {
+    background-color: #ffffff; /* Give it a background so content doesn't show through */
+    padding: 20px; /* Add some padding around your header */
+    border-bottom: 1px solid #eee; /* Optional: a subtle separator */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03); /* Optional: a subtle shadow */
+    z-index: 100; /* Ensure it stays on top of other content */
+    /* The text-align and margin-bottom for the header itself will still apply */
+}
+
+.content-area {
+    background-color: #ffffff; /* White background for the form card */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* margin-top: 20px; */ /* REMOVE this margin-top, as the header is now fixed above it */
+    flex-grow: 1; /* Make the content area expand vertically */
+    overflow-y: auto; /* THIS IS WHERE YOUR SCROLLING HAPPENS */
+    margin: 20px; /* Add margin around the scrollable content area */
+}
+
+/* Original form styling - make sure these are still valid */
+.form-header {
+    text-align: center;
+    margin-bottom: 30px; /* Keep this for spacing *within* the header */
+    color: #333;
+}
+
+.form-header h2 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    color: #3f51b5; /* Primary color for the title */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-header h2 .fas {
+    margin-right: 15px;
+    font-size: 1.2em;
+}
+
+.form-header p {
+    font-size: 1.1em;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.item-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 25px; /* Spacing between grid items */
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 1em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus {
+    border-color: #3f51b5;
+    box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.2);
+    outline: none;
+}
+
+.hint-text {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* Styling for readonly final price field */
+.final-price-group input[readonly] {
+    background-color: #f8f8f8;
+    cursor: not-allowed;
+    font-weight: 700;
+    color: #3f51b5;
+}
+
+.submit-button {
+    background-color: #4CAF50; /* Green submit button */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: center; /* Center the button in the column layout */
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: fit-content; /* Adjust button width to content */
+    min-width: 180px;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.form-message {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    display: none; /* Hidden by default, shown via JS */
+}
+
+.form-message.success {
+    background-color: #e6ffe6;
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.form-message.error {
+    background-color: #ffe6e6;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+    .form-header h2 {
+        font-size: 1.8em;
+    }
+    .form-header p {
+        font-size: 1em;
+    }
+    .submit-button {
+        width: 100%; /* Full width button on small screens */
+    }
+    .content-area {
+      padding: 20px;
+      margin: 10px; /* Reduce margin on smaller screens */
+    }
+    .fixed-header {
+      padding: 15px; /* Adjust header padding on smaller screens */
+    }
+}
