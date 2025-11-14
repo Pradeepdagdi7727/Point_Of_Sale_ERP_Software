@@ -1,10 +1,11 @@
 const mysql  = require("mysql");
 
 const db = mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || '',
-    database: process.env.DB_NAME || 'supermarketDB'
+    host: process.env.MYSQLHOST || 'localhost',
+    user: process.env.MYSQLUSER || 'root',
+    password: process.env.MYSQLPASSWORD || '',
+    database: process.env.MYSQLDATABASE || 'supermarketDB',
+    port: process.env.MYSQLPORT || 3306
 });
 
 db.connect(err => {
@@ -12,7 +13,7 @@ db.connect(err => {
         console.error('DB connection error:', err);
         process.exit(1);
     }
-    console.log("database connection successfull");
+    console.log("Database connection successful");
 });
 
 module.exports = db;
