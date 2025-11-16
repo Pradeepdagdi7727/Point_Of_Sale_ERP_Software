@@ -164,29 +164,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Cart operations ---
   function addItemToCart(product, quantity = 1) {
-    // Normalize product fields to numbers immediately
-    const normalized = {
+  const existingItemIndex = cart.findIndex(item => item.id == product.id);
+
+  if (existingItemIndex > -1) {
+    cart[existingItemIndex].qty += quantity;
+  } else {
+    cart.push({
       id: product.id,
       barcode: product.barcode,
       name: product.name,
-      qty: toNumber(quantity, 1),
-      mrp: toNumber(product.price, 0),
-      taxRate: toNumber(product.tax, 0.05),
-      unitCost: toNumber(product.final_price ?? product.price, product.price ?? 0),
+      qty: quantity,
+      
+      // FIXED: all values converted to numbers
+      mrp: parseFloat(product.price) || 0,
+      taxRate: parseFloat(product.tax) || 0.05,
+      unitCost: parseFloat(product.final_price || product.price) || 0,
       discountType: product.discount_type || "percent",
-      discountValue: toNumber(product.discount ?? product.discountValue ?? 0, 0),
-    };
-
-    const existingIndex = cart.findIndex((i) => i.id == normalized.id);
-
-    if (existingIndex > -1) {
-      cart[existingIndex].qty = toNumber(cart[existingIndex].qty, 0) + normalized.qty;
-    } else {
-      cart.push(normalized);
-    }
-
-    renderCart();
+      discountValue: parseFloat(product.discount) || 0
+    });
   }
+
+  renderCart();
+}
 
   function updateItemQuantity(itemId, change) {
     const idx = cart.findIndex((i) => i.id == itemId);
