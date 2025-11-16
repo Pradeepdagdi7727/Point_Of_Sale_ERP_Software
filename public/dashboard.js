@@ -219,16 +219,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 async function loadDashboard() {
   const res = await fetch("/stats");
-  const data = await res.json();
+  const d = await res.json();
 
-  if (data.success) {
-    document.getElementById("total-sales").innerText = "₹ " + data.data.todayRevenue;
-    document.getElementById("total-invoice").innerText = data.data.totalInvoices;
-    document.getElementById("sold-qty").innerText = data.data.totalQuantity;
-    document.getElementById("total-customers").innerText = data.data.totalCustomers;
-  }
+  if (!d.success) return;
+
+  const set = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = value;
+  };
+
+  set("total-sales", "₹ " + d.data.todayRevenue);
+  set("total-invoice", d.data.totalInvoices);
+  set("sold-qty", d.data.totalQuantity);
+  set("total-customers", d.data.totalCustomers);
 }
 
-
-loadDashboard();
+document.addEventListener("DOMContentLoaded", loadDashboard);
 
